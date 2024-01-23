@@ -29,20 +29,19 @@
         padding-top: 1rem;
 
         input[type="checkbox"] {
+            flex: 1;
             text-align: center;
             width: 2.5rem;
             min-width: 48px;
             height: 2.5rem;
             min-height: 48px;
             cursor: pointer;
-            margin-right: 1.5rem;
-
-            &:focus + label {
-                text-decoration: underline;
-            }
+            margin-right: 1rem;
         }
         label {
+            flex: 5;
             font-size: 1.1rem;
+            z-index: 1;
         }
     }
 

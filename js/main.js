@@ -14,8 +14,13 @@ const initApp = () => {
   //Add listeners
   const itemEntryForm = document.getElementById("itemEntryForm");
   itemEntryForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    processSubmission();
+    const newItem = document.getElementById("newItem");
+    if (!newItem.value) {
+      alert("Please Enter a Task");
+    } else {
+      event.preventDefault();
+      processSubmission();
+    }
   });
 
   const clearItems = document.getElementById("clearItems");
@@ -83,31 +88,49 @@ const buildListItem = (item) => {
   check.type = "checkbox";
   check.id = item.getId();
   check.tabIndex = 0;
-  addClickListenerToCheckbox(check);
+  check.addEventListener("click", function () {
+    check.nextElementSibling.style.textDecoration = "line-through";
+  });
+
   const label = document.createElement("label");
   label.htmlFor = item.getId();
   label.textContent = item.getItem();
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+  deleteBtn.id = `del${item.getId()}`;
+  deleteBtn.classList.add("deleteTask");
+  addClickListenerToDeleteBtn(deleteBtn);
+
+  const editBtn = document.createElement("button");
+  editBtn.innerHTML = '<i class="fa-regular fa-pen-to-square"></i>';
+  editBtn.classList.add("editTask");
+
   div.appendChild(check);
   div.appendChild(label);
+  div.appendChild(editBtn);
+  div.appendChild(deleteBtn);
 
   const container = document.getElementById("listItems");
   container.appendChild(div);
 };
 
-const addClickListenerToCheckbox = (checkbox) => {
-  checkbox.addEventListener("click", (event) => {
-    toDoList.removeItemFromList(checkbox.id);
+const addClickListenerToDeleteBtn = (deleteBtn) => {
+  deleteBtn.addEventListener("click", (event) => {
+    const parentEl = deleteBtn.parentElement;
+    const label = parentEl.firstElementChild;
+    toDoList.removeItemFromList(label.id);
     updatePersistentData(toDoList.getList());
-    const removedText = getLabelText(checkbox.id);
+    const removedText = getLabelText(label.id);
     updateScreenReaderConfirmation(removedText, "removed from list");
     setTimeout(() => {
       refreshThePage();
-    }, 1000);
+    }, 500);
   });
 };
 
-const getLabelText = (checkboxId) => {
-  return document.getElementById(checkboxId).nextElementSibling.textContent;
+const getLabelText = (labelId) => {
+  return document.getElementById(labelId).nextElementSibling.textContent;
 };
 
 const updatePersistentData = (listArray) => {
