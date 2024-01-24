@@ -18,7 +18,7 @@ html, body {
 
 body {
   padding: 20px;
-  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(/img/BG3.jpg) no-repeat center center/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(/BG3.jpg) no-repeat center center/cover;
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
