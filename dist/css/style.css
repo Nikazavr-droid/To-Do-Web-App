@@ -35,7 +35,7 @@ section {
   border-radius: 10px;
 }
 
-.listTitle button, .newItemEntry button {
+.button {
   width: 15%;
   min-width: 48px;
   min-height: 48px;
@@ -44,10 +44,10 @@ section {
   border-radius: 10px;
   outline: none;
 }
-.listTitle button:hover, .newItemEntry button:hover {
+.button:hover {
   cursor: pointer;
 }
-.listTitle button:hover, .listTitle button:focus, .newItemEntry button:hover, .newItemEntry button:focus {
+.button:hover, .button:focus {
   filter: brightness(120%);
   box-shadow: 4px 2px 5px #000;
 }
@@ -153,7 +153,7 @@ section {
 
 .deleteTask:hover {
   background-color: red;
-  color: white;
+  color: #fff;
 }
 
 .editTask {
@@ -166,5 +166,5 @@ section {
 
 .editTask:hover {
   background-color: orange;
-  color: white;
+  color: #fff;
 }/*# sourceMappingURL=style.css.map */

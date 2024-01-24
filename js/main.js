@@ -89,7 +89,11 @@ const buildListItem = (item) => {
   check.id = item.getId();
   check.tabIndex = 0;
   check.addEventListener("click", function () {
-    check.nextElementSibling.style.textDecoration = "line-through";
+    if (check.checked) {
+      check.nextElementSibling.style.textDecoration = "line-through";
+    } else {
+      check.nextElementSibling.style.textDecoration = "none";
+    }
   });
 
   const label = document.createElement("label");
@@ -104,7 +108,9 @@ const buildListItem = (item) => {
 
   const editBtn = document.createElement("button");
   editBtn.innerHTML = '<i class="fa-regular fa-pen-to-square"></i>';
+  editBtn.id = `edit${item.getId()}`;
   editBtn.classList.add("editTask");
+  addClickListenerToEditBtn(editBtn);
 
   div.appendChild(check);
   div.appendChild(label);
@@ -123,9 +129,20 @@ const addClickListenerToDeleteBtn = (deleteBtn) => {
     updatePersistentData(toDoList.getList());
     const removedText = getLabelText(label.id);
     updateScreenReaderConfirmation(removedText, "removed from list");
-    setTimeout(() => {
-      refreshThePage();
-    }, 500);
+    refreshThePage();
+  });
+};
+
+const addClickListenerToEditBtn = (editBtn) => {
+  editBtn.addEventListener("click", (event) => {
+    const parentEl = editBtn.parentElement;
+    const label = parentEl.firstElementChild;
+    const textForEdit = getLabelText(label.id);
+    document.getElementById("newItem").value = textForEdit;
+    setFocusOnItemEntry();
+    updateScreenReaderConfirmation(textForEdit, "is being edited");
+    toDoList.removeItemFromList(label.id);
+    updatePersistentData(toDoList.getList());
   });
 };
 

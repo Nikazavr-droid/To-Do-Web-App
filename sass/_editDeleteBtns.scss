@@ -6,26 +6,26 @@
   }
   
   .deleteTask {
-    color: red;
+    color: $delete-button-color;
     font-size: 1.1rem;
-    border: solid 2px red;
+    border: solid 2px $delete-button-color;
     max-width: 50px;
   }
   
   .deleteTask:hover {
-    background-color: red;
-    color: white;
+    background-color: $delete-button-color;
+    color: $button-textcolor;
   }
   
   .editTask {
-    color: orange;
+    color: $edit-button-color;
     font-size: 1.1rem;
-    border: solid 2px orange;
+    border: solid 2px $edit-button-color;
     max-width: 50px;
     margin-inline: 5px;
   }
   
   .editTask:hover {
-    background-color: orange;
-    color: white;
+    background-color: $edit-button-color;
+    color: $button-textcolor;
   }
